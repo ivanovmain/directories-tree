@@ -6,5 +6,6 @@
 ## Run project
 Clone project and use
 ### `npm install`
-or
-### `yarn install`
+
+In the project directory, you can run:
+### `npm start`
