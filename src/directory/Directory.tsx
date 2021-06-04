@@ -18,7 +18,9 @@ const Directory: React.FC<IDirectory> = ({nodeId, label, nodeIds}) => {
   useEffect(() => {
     if (isOpenDirectory) {
       setIsLoading(true);
-      fetch(`http://164.90.161.80:3000/api/content?dirId=${nodeId}`)
+      fetch(`http://164.90.161.80:3000/api/content?dirId=${nodeId}`,{
+        mode: 'no-cors'
+      })
         .then((res) => {
           if (res.ok) {
             return res.json();

@@ -25,7 +25,9 @@ const Directories: React.FC = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch("http://164.90.161.80:3000/api/content")
+    fetch("http://164.90.161.80:3000/api/content", {
+      mode: 'no-cors'
+    })
       .then((res) => {
         if (res.ok) {
           return res.json();

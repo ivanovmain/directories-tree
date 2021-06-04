@@ -28,7 +28,7 @@ function App() {
   return (
     <Box>
       <CssBaseline />
-      <AppBar className={classes.appBar} position="static">
+      {/* <AppBar className={classes.appBar} position="static">
         <Toolbar>
           <Typography variant="h5" className={classes.title}>
             Digital Habits. Entrance test
@@ -39,7 +39,7 @@ function App() {
             </Link>
           </Typography>
         </Toolbar>
-      </AppBar>
+      </AppBar> */}
       <Box className={classes.container}>
         <Directories />
       </Box>
