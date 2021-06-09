@@ -1,6 +1,11 @@
 import React, {useEffect, useState} from "react";
 import TreeItem from "@material-ui/lab/TreeItem";
 
+type DirectoriesType = {
+  id: number,
+  title: string,
+  children?: Array<DirectoriesType>
+}
 
 interface IDirectory {
   nodeId: string,
@@ -10,7 +15,7 @@ interface IDirectory {
 
 const Directory: React.FC<IDirectory> = ({nodeId, label, nodeIds}) => {
 
-  const [directories, setDirectories] = useState<any>(null);
+  const [directories, setDirectories] = useState<DirectoriesType>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const isOpenDirectory = nodeIds.includes(nodeId);
@@ -27,7 +32,7 @@ const Directory: React.FC<IDirectory> = ({nodeId, label, nodeIds}) => {
           }
         })
         .then(
-          (result) => {
+          (result: DirectoriesType) => {
             setIsLoading(false);
             setDirectories(result);
           },
@@ -52,7 +57,7 @@ const Directory: React.FC<IDirectory> = ({nodeId, label, nodeIds}) => {
   return (
     <TreeItem nodeId={nodeId} label={label} >
       {
-        directoriesChildren.map((child: {id: number, title: string, children: Array<any>}) => {
+        directoriesChildren.map((child: DirectoriesType) => {
           return (
             <Directory
               key={child.id}

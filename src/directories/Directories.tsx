@@ -7,6 +7,12 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 import Directory from "../directory";
 
+type DirectoriesType = {
+  id: number,
+  title: string,
+  children?: Array<DirectoriesType>
+}
+
 
 const useStyles = makeStyles({
   root: {
@@ -18,7 +24,7 @@ const useStyles = makeStyles({
 
 const Directories: React.FC = () => {
 
-  const [directories, setDirectories] = useState<any>(null);
+  const [directories, setDirectories] = useState<DirectoriesType>(null);
   const [error, setError] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [nodeIds, setNodeids] = useState<Array<string>>([]);
@@ -34,7 +40,7 @@ const Directories: React.FC = () => {
         }
       })
       .then(
-        (result) => {
+        (result: DirectoriesType) => {
           setIsLoading(false);
           setDirectories(result);
         },
@@ -67,7 +73,7 @@ const Directories: React.FC = () => {
     return <CircularProgress size={40} color="secondary"/>
   }
   if (error) {
-    return <Typography variant="h5" color="secondary">Возникла ошибка зарузки данных...</Typography>
+    return <Typography variant="h5" color="secondary">Возникла ошибка загрузки данных...</Typography>
   }
 
   const directoriesChildren = directories && directories.children || [];
@@ -85,7 +91,7 @@ const Directories: React.FC = () => {
       multiSelect
     >
       {
-        directoriesChildren.map((child: {id: number, title: string}) => {
+        directoriesChildren.map((child: DirectoriesType) => {
           return (
             <Directory
               key={child.id}
